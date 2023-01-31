@@ -1,73 +1,56 @@
- package com.demoqa;
+package com.demoqa;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
-
 public class AutomationPracticeFormTests {
+
+    private static final String FORM = "https://demoqa.com/automation-practice-form";
+    private static final String NAME = "Ivan";
+    private static final String SURNAME = "Ivanov";
+    private static final String EMAIL = "ivanov.ivan@test.com";
+    private static final String GENDER = "Male";
+    private static final String PHONE = "8800900909";
+    private static final String MONTH = "April";
+    private static final String YEAR = "1995";
+    private static final String DAY = "14";
+    private static final String SUBJECT = "Economics";
+    private static final String HOBBY = "Reading";
+    private static final String PICTURE = "src/test/resources/Screenshot 2022-11-17 at 16.11.13.png";
+    private static final String ADDRESS = "London, UK";
+    private static final String STATE = "NCR";
+    private static final String CITY = "Gurgaon";
+    private static final String UPLAODEDFILE = "Screenshot 2022-11-17 at 16.11.13.png";
+
 
     @BeforeAll
     static void beforeAll() {
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1792x1015";
-        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.baseUrl = "https ://demoqa.com";
     }
 
     @Test
-    void fillFormTest() {
+    public void testAnnotatedStep() {
+        WebSteps steps = new WebSteps();
 
-        fillForm();
-        checkForm();
-    }
-
-    private static void fillForm() {
-        open("https://demoqa.com/automation-practice-form");
-
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
-        //executeJavaScript("$('#RightSide_Advertisement').remove()");
-        $("#firstName").setValue("Ivan");
-        $("#lastName").setValue("Ivanov");
-        $("#userEmail").setValue("ivanov.ivan@test.com");
-        $("#userEmail").setValue("ivanov.ivan@test.com");
-        $("#genterWrapper").$(byText("Male")).click();
-        $("#userNumber").setValue("88009009090");
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").click();
-        $(".react-datepicker__month-select").selectOption("April");
-        $(".react-datepicker__year-select").click();
-        $(".react-datepicker__year-select").selectOption("1995");
-        $(".react-datepicker__day--014").click();
-        $("#subjectsInput").setValue("Economics").pressEnter();
-        $("#hobbiesWrapper").$(byText("Reading")).click();
-        $("#hobbiesWrapper").$(byText("Music")).click();
-        $("#uploadPicture").uploadFile(new File("src/test/resources/Screenshot 2022-11-17 at 16.11.13.png"));
-        $("#currentAddress").setValue("London, UK");
-        $("#state").click();
-        $("#stateCity-wrapper").$(byText("NCR")).click();
-        $("#city").click();
-        $("#stateCity-wrapper").$(byText("Gurgaon")).click();
-        $("#submit").click();
-    }
-
-    private static void checkForm() {
-        $(".modal-content").shouldBe(Condition.visible);
-        $(".modal-content").shouldHave(Condition.text("Ivan Ivanov"));
-        $(".modal-content").shouldHave(Condition.text("ivanov.ivan@test.com"));
-        $(".modal-content").shouldHave(Condition.text("Male"));
-        $(".modal-content").shouldHave(Condition.text("8800900909"));
-        $(".modal-content").shouldHave(Condition.text("14 April,1995"));
-        $(".modal-content").shouldHave(Condition.text("Economics"));
-        $(".modal-content").shouldHave(Condition.text("Reading, Music"));
-        $(".modal-content").shouldHave(Condition.text("Screenshot 2022-11-17 at 16.11.13.png"));
-        $(".modal-content").shouldHave(Condition.text("London, UK"));
-        $(".modal-content").shouldHave(Condition.text("NCR Gurgaon"));
-        $("#closeLargeModal").click();
+        steps.openMainPage(FORM);
+        steps.hideJavaScriptCode();
+        steps.fillFirstName(NAME);
+        steps.fillSurname(SURNAME);
+        steps.fillUserEmail(EMAIL);
+        steps.setGender(GENDER);
+        steps.fillUserNumber(PHONE);
+        steps.setDateOfBirth(MONTH, YEAR, DAY);
+        steps.chooseSubject(SUBJECT);
+        steps.chooseHobbies(HOBBY);
+        steps.uploadPicture(PICTURE);
+        steps.setAddress(ADDRESS);
+        steps.setState(STATE);
+        steps.setCity(CITY);
+        steps.clickSubmit();
+        steps.checkFormContent(NAME, SURNAME, EMAIL, GENDER, PHONE, DAY, MONTH, YEAR,
+                SUBJECT, HOBBY, UPLAODEDFILE, ADDRESS, STATE, CITY);
     }
 }
