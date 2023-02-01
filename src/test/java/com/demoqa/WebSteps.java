@@ -93,22 +93,63 @@ public class WebSteps {
         $("#submit").click();
     }
 
-    @Step("Check form content")
-    public void checkFormContent(String firstName, String lastName, String email,
-                                 String gender, String phoneNumber, String day, String month,
-                                 String year, String subject, String hobby, String picture,
-                                 String address, String state, String city) {
+    @Step("Check modal form appears")
+    public void checkModalForm() {
         $(".modal-content").shouldBe(Condition.visible);
+    }
+
+    @Step("Check name")
+    public void checkStudentName(String firstName, String lastName) {
         $(".modal-content").shouldHave(Condition.text(firstName + " " + lastName));
+    }
+
+    @Step("Check email")
+    public void checkStudentEmail(String email) {
         $(".modal-content").shouldHave(Condition.text(email));
+    }
+
+    @Step("Check gender")
+    public void checkStudentGender(String gender) {
         $(".modal-content").shouldHave(Condition.text(gender));
+    }
+
+    @Step("Check phone number")
+    public void checkStudentNumber(String phoneNumber) {
         $(".modal-content").shouldHave(Condition.text(phoneNumber));
+    }
+
+    @Step("Check date of birth")
+    public void checkDateOfBirth(String day, String month, String year) {
         $(".modal-content").shouldHave(Condition.text(day + " " + month + "," + year));
+    }
+
+    @Step("Check subject")
+    public void checkSubject(String subject) {
         $(".modal-content").shouldHave(Condition.text(subject));
+    }
+
+    @Step("Check hobby")
+    public void checkHobby(String hobby) {
         $(".modal-content").shouldHave(Condition.text(hobby));
+    }
+
+    @Step("Check picture")
+    public void checkPicture(String picture) {
         $(".modal-content").shouldHave(Condition.text(picture));
+    }
+
+    @Step("Check address")
+    public void checkAddress(String address) {
         $(".modal-content").shouldHave(Condition.text(address));
+    }
+
+    @Step("Check state and city")
+    public void checkStateAndCity(String state, String city) {
         $(".modal-content").shouldHave(Condition.text(state + " " + city));
+    }
+
+    @Step("Close modal form")
+    public void closeModalForm() {
         $("#closeLargeModal").click();
     }
 }

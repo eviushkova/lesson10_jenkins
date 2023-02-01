@@ -50,7 +50,17 @@ public class AutomationPracticeFormTests {
         steps.setState(STATE);
         steps.setCity(CITY);
         steps.clickSubmit();
-        steps.checkFormContent(NAME, SURNAME, EMAIL, GENDER, PHONE, DAY, MONTH, YEAR,
-                SUBJECT, HOBBY, UPLAODEDFILE, ADDRESS, STATE, CITY);
+        steps.checkModalForm();
+        steps.checkStudentName(NAME, SURNAME);
+        steps.checkStudentEmail(EMAIL);
+        steps.checkStudentGender(GENDER);
+        steps.checkStudentNumber(PHONE);
+        steps.checkDateOfBirth(DAY, MONTH, YEAR);
+        steps.checkSubject(SUBJECT);
+        steps.checkHobby(HOBBY);
+        steps.checkPicture(UPLAODEDFILE);
+        steps.checkAddress(ADDRESS);
+        steps.checkStateAndCity(STATE, CITY);
+        steps.closeModalForm();
     }
 }
