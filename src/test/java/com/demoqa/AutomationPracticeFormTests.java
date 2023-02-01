@@ -29,6 +29,8 @@ public class AutomationPracticeFormTests {
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1792x1015";
         Configuration.baseUrl = "https ://demoqa.com";
+        Configuration.timeout = 10000;
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
 
     @Test
