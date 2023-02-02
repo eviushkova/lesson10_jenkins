@@ -8,7 +8,8 @@ import java.io.File;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class WebSteps {
+
+public class WebSteps extends TestBase {
 
     @Step("Open main page")
     public void openMainPage(String url) {
